@@ -1,11 +1,12 @@
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Sun, Menu, X, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Sun, Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleMouseEnter = () => {
@@ -18,7 +19,7 @@ const Navbar = () => {
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
       setIsDropdownOpen(false);
-    }, 200); // Adjust delay as needed
+    }, 200);
   };
 
   const leftNavItems = [
@@ -40,6 +41,37 @@ const Navbar = () => {
     { name: 'Franchise Opportunities', path: '/franchise-opportunities' },
   ];
 
+  const sidebarVariants = {
+    closed: {
+      x: '-100%',
+      opacity: 0,
+      transition: {
+        duration: 0.3,
+        ease: 'easeInOut'
+      }
+    },
+    open: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.3,
+        ease: 'easeInOut',
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    closed: { x: -20, opacity: 0 },
+    open: { x: 0, opacity: 1 }
+  };
+
+  const overlayVariants = {
+    closed: { opacity: 0 },
+    open: { opacity: 0.5 }
+  };
+
   return (
     <nav className="bg-white shadow-lg fixed w-full z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -51,13 +83,13 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className="text-gray-600 hover:text-yellow-500 transition-colors duration-200"
+                className="text-gray-600 hover:text-yellow-500 transition-colors duration-200 hidden md:block"
               >
                 {item.name}
               </Link>
             ))}
             <div 
-              className="relative"
+              className="relative hidden md:block"
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
@@ -120,6 +152,7 @@ const Navbar = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-600 hover:text-yellow-500"
+              aria-label="Toggle menu"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -127,52 +160,126 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="md:hidden"
-        >
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white">
-            {leftNavItems.concat(rightNavItems).map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className="block px-3 py-2 text-gray-600 hover:text-yellow-500 hover:bg-gray-50 rounded-md"
-                onClick={() => setIsOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-            <div className="border-t border-gray-200 mt-2 pt-2">
-              {dropdownItems.map((item) => (
-                item.external ? (
-                  <a
-                    key={item.name}
-                    href={item.path}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block px-3 py-2 text-gray-600 hover:text-yellow-500 hover:bg-gray-50 rounded-md"
-                  >
-                    {item.name}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.name}
-                    to={item.path}
-                    className="block px-3 py-2 text-gray-600 hover:text-yellow-500 hover:bg-gray-50 rounded-md"
+      {/* Mobile Sidebar Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Overlay */}
+            <motion.div 
+              variants={overlayVariants}
+              initial="closed"
+              animate="open"
+              exit="closed"
+              onClick={() => setIsOpen(false)}
+              className="fixed inset-0 bg-black z-40"
+            />
+
+            {/* Sidebar */}
+            <motion.div
+              variants={sidebarVariants}
+              initial="closed"
+              animate="open"
+              exit="closed"
+              className="fixed top-0 left-0 h-screen w-64 bg-white shadow-xl z-50 overflow-y-auto"
+            >
+              <div className="p-4 border-b border-gray-200">
+                <div className="flex justify-between items-center">
+                  <Link 
+                    to="/" 
+                    className="flex items-center"
                     onClick={() => setIsOpen(false)}
                   >
-                    {item.name}
+                    <Sun className="h-6 w-6 text-yellow-500" />
+                    <span className="ml-2 font-bold text-gray-800">HEPL Solar</span>
                   </Link>
-                )
-              ))}
-            </div>
-          </div>
-        </motion.div>
-      )}
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="text-gray-500 hover:text-gray-700"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                </div>
+              </div>
+
+              <div className="p-4">
+                {/* All Nav Items */}
+                <div className="space-y-4">
+                  {rightNavItems.map((item) => (
+                    <motion.div key={item.name} variants={itemVariants}>
+                      <Link
+                        to={item.path}
+                        className="block py-2 text-gray-700 hover:text-yellow-500 transition-colors"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    </motion.div>
+                  ))}
+                  
+                  {leftNavItems.map((item) => (
+                    <motion.div key={item.name} variants={itemVariants}>
+                      <Link
+                        to={item.path}
+                        className="block py-2 text-gray-700 hover:text-yellow-500 transition-colors"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    </motion.div>
+                  ))}
+                  
+                  {/* More Dropdown */}
+                  <motion.div variants={itemVariants}>
+                    <button
+                      onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
+                      className="flex items-center justify-between w-full py-2 text-gray-700 hover:text-yellow-500 transition-colors"
+                    >
+                      <span>More</span>
+                      <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${mobileDropdownOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    
+                    <AnimatePresence>
+                      {mobileDropdownOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="ml-4 mt-2 space-y-2 overflow-hidden"
+                        >
+                          {dropdownItems.map((item) => (
+                            item.external ? (
+                              <a
+                                key={item.name}
+                                href={item.path}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center py-2 text-gray-600 hover:text-yellow-500"
+                              >
+                                <ChevronRight className="h-4 w-4 mr-2" />
+                                {item.name}
+                              </a>
+                            ) : (
+                              <Link
+                                key={item.name}
+                                to={item.path}
+                                className="flex items-center py-2 text-gray-600 hover:text-yellow-500"
+                                onClick={() => setIsOpen(false)}
+                              >
+                                <ChevronRight className="h-4 w-4 mr-2" />
+                                {item.name}
+                              </Link>
+                            )
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };
