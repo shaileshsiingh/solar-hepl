@@ -235,16 +235,19 @@ const HEPLFranchisePage = () => {
         <p className="text-gray-700 max-w-4xl mx-auto mb-8">
           Be a part of the solution. Partner with HEPL Renewable Energy Pvt. Ltd. and make a difference in the renewable energy landscape!
         </p>
-        <motion.button
+        <motion.a
+          href="https://docs.google.com/forms/d/e/1FAIpQLSdLmRoC_aJmkCVPNklHVFSdsuJDKDjl2FVGZAQHqU8wFX_6Vw/viewform?usp=send_form"
+          target="_blank"
+          rel="noopener noreferrer"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className="bg-green-600 text-white text-lg py-3 px-6 rounded-full 
           hover:bg-green-700 transition duration-300 
-          shadow-lg hover:shadow-xl flex items-center mx-auto"
+          shadow-lg hover:shadow-xl flex items-center mx-auto inline-block"
         >
           <FileTextIcon className="mr-3" size={24} />
           Enquiry Form
-        </motion.button>
+        </motion.a>
       </motion.div>
 
       <div className="text-center text-gray-500 text-sm">
