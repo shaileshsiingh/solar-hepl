@@ -68,7 +68,7 @@ const OurProjects = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <div className="flex justify-center items-center mb-4">
+          <div className="flex justify-center items-center mb-4 mt-12">
             <Sun className="text-yellow-500 mr-4" size={48} />
             <h1 className="text-4xl font-bold text-green-800">
               Our Solar Projects (67 MEGA WATTS)
