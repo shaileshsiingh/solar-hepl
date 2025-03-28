@@ -22,7 +22,7 @@ const Navbar = () => {
     { name: 'Our Projects', path: '/projects' },
     { name: 'Document Checklist', path: '/document-checklist' },
     { name: 'Register with us', path: 'https://docs.google.com/forms/d/e/1FAIpQLSdsTNcddJwsDiXn2TWB9UasHocmE-ZMm16xeYMrj4rsEAYd8Q/viewform', external: true },
-    { name: 'Resco Solar Modal', path: '/resco-solar' },
+    { name: 'Resco Solar Model', path: '/resco-solar' },
     { name: 'Franchise Opportunities', path: '/franchise-opportunities' },
   ];
 
