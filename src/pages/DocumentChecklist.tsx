@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { 
   FileIcon, 
@@ -44,7 +43,7 @@ const DocumentChecklist = () => {
       <motion.div 
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        className="bg-white shadow-xl rounded-2xl p-8 mb-8"
+        className="bg-white shadow-xl rounded-2xl p-8 mb-8 mt-12"
       >
         <div className="flex items-center justify-center mb-8">
           <FileIcon className="mr-4 text-blue-600" size={40} />
