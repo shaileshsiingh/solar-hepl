@@ -82,7 +82,7 @@ const KusumYojana = () => {
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-4xl font-bold text-center text-green-700 mb-12 uppercase tracking-tight"
+        className="text-4xl font-bold text-center text-green-700 mt-12 mb-12 uppercase tracking-tight"
       >
         KUSUM YOJANA (A)
       </motion.h1>

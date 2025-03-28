@@ -8,6 +8,8 @@ import Services from './pages/Services';
 import Contact from './pages/Contact';
 import KusumYojana from './pages/KusumYojana';
 import OurProjects from './pages/OurProjects';
+import RescoSolarModal from './pages/RescoSolarModal';
+import DocumentChecklist from './pages/DocumentChecklist';
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/kusum-yojana" element={<KusumYojana />} />
             <Route path="/projects" element={<OurProjects />} />
+            <Route path="/resco-solar" element={<RescoSolarModal />} />
+            <Route path="/document-checklist" element={<DocumentChecklist />} />
           </Routes>
         </main>
         <Footer />
