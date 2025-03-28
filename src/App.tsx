@@ -15,7 +15,7 @@ import FranchiseOpportunities from './pages/FranchiseOpportunities';
 function App() {
   return (
     <Router>
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col sky-bg">
         <Navbar />
         <main className="flex-grow">
           <Routes>

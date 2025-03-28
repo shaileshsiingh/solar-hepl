@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Sun, Menu, X, ChevronDown } from 'lucide-react';
@@ -6,6 +6,20 @@ import { Sun, Menu, X, ChevronDown } from 'lucide-react';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setIsDropdownOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setIsDropdownOpen(false);
+    }, 200); // Adjust delay as needed
+  };
 
   const leftNavItems = [
     { name: 'Services', path: '/services' },
@@ -44,8 +58,8 @@ const Navbar = () => {
             ))}
             <div 
               className="relative"
-              onMouseEnter={() => setIsDropdownOpen(true)}
-              onMouseLeave={() => setIsDropdownOpen(false)}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
             >
               <button
                 className="flex items-center text-gray-600 hover:text-yellow-500 transition-colors duration-200"

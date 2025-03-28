@@ -114,7 +114,7 @@ const KusumYojana = () => {
               <h2 className="text-2xl font-bold text-center text-green-800 mb-4">
                 {section.title}
               </h2>
-              <p className="text-center text-gray-600 mb-4">
+              <p className="text-center text-gray-600 mb-4 font-bold">
                 {section.description}
               </p>
               <ul className="text-left list-disc list-inside text-gray-700 space-y-2">
