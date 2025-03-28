@@ -42,9 +42,12 @@ const Navbar = () => {
                 {item.name}
               </Link>
             ))}
-            <div className="relative">
+            <div 
+              className="relative"
+              onMouseEnter={() => setIsDropdownOpen(true)}
+              onMouseLeave={() => setIsDropdownOpen(false)}
+            >
               <button
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className="flex items-center text-gray-600 hover:text-yellow-500 transition-colors duration-200"
               >
                 More <ChevronDown className="ml-1 h-4 w-4" />
