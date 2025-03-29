@@ -1,14 +1,13 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Twitter, Instagram, Mail, Phone, MapPin } from 'lucide-react';
-
+import logo from '../pages/assets/logo.jpg';
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">HEPL Solar</h3>
+            <img src={logo} alt="HEPL Solar Logo" className="h-24 w-24" />
             <p className="text-gray-400">
               Leading the way in sustainable solar energy solutions for a brighter future.
             </p>
@@ -29,7 +28,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li className="flex items-center text-gray-400">
                 <Phone className="h-5 w-5 mr-2" />
-                <span>+91 1234567890</span>
+                <span>+916263471229</span>
               </li>
               <li className="flex items-center text-gray-400">
                 <Mail className="h-5 w-5 mr-2" />
@@ -37,7 +36,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center text-gray-400">
                 <MapPin className="h-5 w-5 mr-2" />
-                <span>Chennai, India</span>
+                <span>Bhopal, India</span>
               </li>
             </ul>
           </div>

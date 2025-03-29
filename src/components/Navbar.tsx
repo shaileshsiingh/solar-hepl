@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
+import logo from '../pages/assets/logo.jpg';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -73,7 +74,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-lg fixed w-full z-50">
+    <nav className="shadow-lg fixed w-full z-50" style={{backgroundColor:'#F8D9D9'}}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           
@@ -83,7 +84,7 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className="text-gray-600 hover:text-yellow-500 transition-colors duration-200 hidden md:block"
+                className="text-sky-900 hover:text-yellow-500 transition-colors duration-200 hidden md:block"
               >
                 {item.name}
               </Link>
@@ -107,7 +108,7 @@ const Navbar = () => {
                         href={item.path}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block px-4 py-2 text-gray-600 hover:text-yellow-500 hover:bg-gray-50"
+                        className="block px-4 py-2 text-sky-900 hover:text-yellow-500 hover:bg-gray-50"
                       >
                         {item.name}
                       </a>
@@ -115,7 +116,7 @@ const Navbar = () => {
                       <Link
                         key={item.name}
                         to={item.path}
-                        className="block px-4 py-2 text-gray-600 hover:text-yellow-500 hover:bg-gray-50"
+                        className="block px-4 py-2 text-sky-900 hover:text-yellow-500 hover:bg-gray-50"
                       >
                         {item.name}
                       </Link>
@@ -129,8 +130,8 @@ const Navbar = () => {
           {/* Centered Logo */}
           <div className="flex-grow flex justify-center">
             <Link to="/" className="flex items-center">
-              <Sun className="h-8 w-8 text-yellow-500" />
-              <span className="ml-2 text-xl font-bold text-gray-800">HEPL Solar</span>
+              <img src={logo} alt="HEPL Solar Logo" className="h-16 w-16" />
+              {/* <span className="ml-2 text-xl font-bold text-gray-800">HEPL Solar</span> */}
             </Link>
           </div>
 
